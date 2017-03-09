@@ -6,9 +6,6 @@ import java.util.Scanner;
  */
 public class TUI {
 
-    public final String userName = "root";
-    public final String password = "root";
-    public static String url = "jdbc:mysql://localhost:3306/";
     private Connection conn;
     private Statement stmt;
 
@@ -19,8 +16,11 @@ public class TUI {
      * @throws Exception fordi det er så utrolig mange exceptions som kan throwes at det fyller skjermen
      */
     public static Connection connect(Connection conn) throws Exception {
+        String userName = "root";
+        String password = "root";
+        String url = "jdbc:mysql://localhost:3306/";
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        conn = DriverManager.getConnection(url);
+        conn = DriverManager.getConnection(url, userName, password);
         if (conn != null){
             System.out.println("Tilkoblet til databasen.");
             return conn;
