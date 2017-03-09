@@ -1,7 +1,5 @@
-import org.omg.CORBA.CODESET_INCOMPATIBLE;
-
 import java.sql.*;
-import java.util.*;
+import java.util.Scanner;
 
 /**
  * Created by Adrian on 09.03.2017.
@@ -10,7 +8,7 @@ public class TUI {
 
     public final String userName = "root";
     public final String password = "root";
-    public String url = "jdbc:mysql://localhost:3306/";
+    public static String url = "jdbc:mysql://localhost:3306/";
     private Connection conn;
     private Statement stmt;
 
@@ -20,7 +18,7 @@ public class TUI {
      * @return
      * @throws Exception fordi det er så utrolig mange exceptions som kan throwes at det fyller skjermen
      */
-    public Connection connect(Connection conn) throws Exception {
+    public static Connection connect(Connection conn) throws Exception {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         conn = DriverManager.getConnection(url);
         if (conn != null){
@@ -39,7 +37,7 @@ public class TUI {
      * @param conn
      * @throws SQLException
      */
-    public void runUI(Connection conn) throws SQLException {
+    public static void runUI(Connection conn) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         String mainPage = " == Hovedside == \n " +
                 "Vennligst velg en av disse kategoriene: \n" +
@@ -329,6 +327,24 @@ public class TUI {
     private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
+    }
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        try {
+            conn = connect(conn);
+            runUI(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null){
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
