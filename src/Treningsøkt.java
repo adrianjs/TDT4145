@@ -11,7 +11,7 @@ public class Treningsøkt {
     private int varighet, utendørsTemperatur, innendørsTilskuere, øktId;
 
     //constructer
-    public Treningsøkt (dato, tidspunkt, varighet, formål, tips, utendørsVær, utendørsTemperatur, innendørsLuft, innendørsTilskuere, malFor, øktId, navn) {
+    public Treningsøkt (String dato, String tidspunkt, int varighet, String formål, String tips, String utendørsVær, int utendørsTemperatur, String innendørsLuft, int innendørsTilskuere, boolean malFor, int øktId, String navn) {
         this.dato = dato;
         this.tidspunkt = tidspunkt;
         this.varighet = varighet;
@@ -20,9 +20,9 @@ public class Treningsøkt {
         this.utendørsVær = utendørsVær;
         this.utendørsTemperatur = utendørsTemperatur;
         this.innendørsLuft = innendørsLuft;
-        this.innendørsTilskuere = innendørsTilskuere
+        this.innendørsTilskuere = innendørsTilskuere;
         if (malFor) {
-            this.øktId = øktId
+            this.øktId = øktId;
             this.navn = navn;
         }
     }

@@ -7,21 +7,21 @@ import java.util.Scanner;
 public class Resultatlogg {
 
     //resultatlogg
-    private String resultater, beste, måltype;
+    private String resultater, beste, målType;
     private int øvelseId;
 
     //constructor
-    public ResultatLogg(resultater, beste, måltype, øvelseId) {
+    public Resultatlogg(String resultater, String beste, String målType, int øvelseId) {
         this.resultater = resultater;
         this.beste = beste;
-        this.måltype = måltype;
+        this.målType = målType;
         this.øvelseId = øvelseId;
     }
 
     //getters
     public String getResultater() { return resultater; }
     public String getBeste() { return beste; }
-    public String getMåltype() { return måltype; }
+    public String getMålType() { return målType; }
     public int getØvelseId() { return øvelseId; }
 
 }

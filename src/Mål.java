@@ -11,15 +11,15 @@ public class Mål {
     private int øvelseId;
 
     //constructor
-    public Mål(mål, måltype, øvelseId) {
+    public Mål(String mål, String målType, int øvelseId) {
         this.mål = mål;
-        this.måltype = måltype;
+        this.målType = målType;
         this.øvelseId = øvelseId;
     }
 
     //getters
     public String getMål() { return mål; }
-    public String getMåltype() { return måltype; }
+    public String getMåltype() { return målType; }
     public int getØvelseId() { return øvelseId; }
 
 }

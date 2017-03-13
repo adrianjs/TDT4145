@@ -19,7 +19,7 @@ public class Øvelse {
     String muskelgruppe;
 
     //constructer
-    public Øvelse (navn, beskrivelse, øktId, type, lengde, antallMin, puls, gps, belastning, repetisjoner, sett, muskelgruppe) {
+    public Øvelse (String navn, String beskrivelse, int øktId, char type, int lengde, int antallMin, int puls, String gps, int belastning, int repetisjoner, int sett, String muskelgruppe) {
         this.øktId = øktId;
         this.navn = navn;
         this.beskrivelse = beskrivelse;

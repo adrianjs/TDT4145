@@ -11,7 +11,7 @@ public class Gruppe {
     private int subGruppeId, øvelseId;
 
     //constructor
-    public Gruppe(kategori, beskrivelse, subGruppeId, øvelseId) {
+    public Gruppe(String kategori, String beskrivelse, int subGruppeId, int øvelseId) {
         this.kategori = kategori;
         this.beskrivelse = beskrivelse;
         this.subGruppeId = subGruppeId;
