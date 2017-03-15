@@ -118,7 +118,20 @@ public class TUI {
         // bruk gjerne ResultSet, se på get...Id-funksjonene for inspirasjon
     }
 
+<<<<<<< HEAD
     
+=======
+
+    /**
+     * Skal legge til mål i databasen
+     * Må kanskje ha øktID eller øvelseID som parameter
+     * @param conn
+     * @param scanner
+     */
+    private static void addMålToØvelse(Connection conn, Scanner scanner){
+
+    }
+>>>>>>> f718ffba485c1e86b08a76bc597f8c8bfba91b6f
 
     /**
      * Skal lage grupper av øvelser
