@@ -6,16 +6,27 @@ import java.util.Scanner;
  */
 public class Treningsøkt {
 
+    //connection
     private Connection conn;
     private Statement stmt;
 
     //økt
     private String dato, tidspunkt, formål, tips;
-    private String utendørsVær = null;
-    private String innendørsLuft = null;
-    private int utendørsTemperatur = null;
-    private int innendørsTilskuere = null;
     private int varighet;
+
+    //innendørs
+    private String innendørsLuft;
+    private int innendørsTilskuere;
+
+    //utendørs
+    private String utendørsVær;
+    private int utendørsTemperatur;
+
+    //constructor
+    public Øvelse(Connection conn, Statement stmt) {
+        this.conn = conn;
+        this.stmt = stmt;
+    }
 
     //getters
     public String getDato() { return dato; }
