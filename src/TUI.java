@@ -120,31 +120,6 @@ public class TUI {
     }
 
     /**
-     * Legger til en ny treningsøkt
-     * Kall inne i funksjonen bruker makeTreningsøkt for å spesifisere
-     * @param conn
-     * @param scanner
-     */
-    private static void addNyTreningsøkt(Connection conn, Scanner scanner){
-        int øktID = getØktId(conn);
-        makeTreningsøkt(conn, scanner, øktID);
-    }
-
-    /**
-     * Trenger ganske mye mere arbeid, har lagt til et grunnlag. Kanskje det funker, kanskje ikke.
-     * Ikke vær redd for å endre på noe :p
-     * @param conn
-     * @param scanner
-     * @param øktID
-     */
-    private static void makeTreningsøkt(Connection conn, Scanner scanner, int øktID){
-        System.out.println("Når var treningen din?");
-        // Går det ann å scanne inn et datetime-objekt? Trenger ihvertfall å få inn dato fra brukeren
-        // på et fornuftig vis
-        // String sql = "INSERT INTO treningsøkt VALUES(" + øktID + ", " + datoen)
-    }
-
-    /**
      * Skal legge til mål i databasen
      * Må kanskje ha øktID eller øvelseID som parameter
      * @param conn
