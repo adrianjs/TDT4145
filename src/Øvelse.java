@@ -42,6 +42,11 @@ public class Øvelse {
     public int getSett() { return sett; }
     public String getMuskelgruppe() { return muskelgruppe; }
 
+    /**
+     * Henter øktID for bruk i programmet
+     * @param conn
+     * @return øktID eller 0
+     */
     private static int getØktIdFromDB(Connection conn){
         String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
         try {
@@ -57,6 +62,14 @@ public class Øvelse {
         return 0;
     }
 
+    /**
+     * Legger til en øvelse, burde nok brukes i sammenheng med makeTreningsøkt
+     * Kaller på addStyrke og addUtholdenhet
+     * @param conn
+     * @param scanner
+     * @param øktID
+     * @throws SQLException
+     */
     private static void addØvelse(Connection conn, Scanner scanner, int øktID) throws SQLException {
         int øvelseID = getØvelseID(conn);
         System.out.println("Hvilken type øvelse vil du legge til? \n" +
@@ -75,6 +88,14 @@ public class Øvelse {
         }
     }
 
+    /**
+     * Legger til en styrkeøvelse, med tilhørende felt
+     * @param conn
+     * @param scanner
+     * @param øktID
+     * @param øvelseID
+     * @throws SQLException
+     */
     private static void addStyrkeØvelse(Connection conn, Scanner scanner, int øktID, int øvelseID) throws SQLException {
         System.out.println("Legg til en styrkeøvelse");
         System.out.println("Hva er navnet på øvelsen?");
@@ -104,6 +125,15 @@ public class Øvelse {
         }
     }
 
+    /**
+     * Legger til en utholdenhetsøvelse, med tilhørende felt
+     * Vet ikke helt hvordan puls og gps skal fungere
+     * @param conn
+     * @param scanner
+     * @param øktID
+     * @param øvelseID
+     * @throws SQLException
+     */
     private static void addUtholdenhetØvelse(Connection conn, Scanner scanner, int øktID, int øvelseID) throws SQLException {
         System.out.println("Legg til en utholdenhetsøvelse");
         System.out.println("Hva er navnet på øvelsen?");
