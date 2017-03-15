@@ -8,7 +8,6 @@ public class Øvelse {
 
     //connection
     private Connection conn;
-    private Statement stmt;
 
     //øvelse
     private String navn, beskrivelse;
@@ -23,9 +22,8 @@ public class Øvelse {
     private String muskelgruppe;
 
     //constructor
-    public Øvelse(Connection conn, Statement stmt) {
+    public Øvelse(Connection conn) {
         this.conn = conn;
-        this.stmt = stmt;
         this.øktId = getØktIdFromDB(conn);
     }
 
@@ -47,7 +45,7 @@ public class Øvelse {
      * @param conn
      * @return øktID eller 0
      */
-    private static int getØktIdFromDB(Connection conn){
+    public int getØktIdFromDB(Connection conn){
         String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
         try {
             ResultSet rs = getResultSet(conn, query);
@@ -70,17 +68,16 @@ public class Øvelse {
      * @param øktID
      * @throws SQLException
      */
-    private static void addØvelse(Connection conn, Scanner scanner, int øktID) throws SQLException {
-        int øvelseID = getØvelseID(conn);
+    public void addØvelse(Scanner scanner) throws SQLException {
         System.out.println("Hvilken type øvelse vil du legge til? \n" +
                 "(s)tyrke eller (u)tholdenhet?");
         String input = scanner.nextLine();
         switch (input){
             case ("s"):
-                addStyrkeØvelse(conn, scanner, øktID, øvelseID);
+                addStyrkeØvelse(scanner, øktId);
                 break;
             case ("u"):
-                addUtholdenhetØvelse(conn, scanner, øktID, øvelseID);
+                addUtholdenhetØvelse(scanner, øktId);
                 break;
             default:
                 System.out.println("Ikke en gjenkjent type øvelse.");
@@ -96,23 +93,23 @@ public class Øvelse {
      * @param øvelseID
      * @throws SQLException
      */
-    private static void addStyrkeØvelse(Connection conn, Scanner scanner, int øktID, int øvelseID) throws SQLException {
+    private void addStyrkeØvelse(Scanner scanner, int øktID) throws SQLException {
         System.out.println("Legg til en styrkeøvelse");
         System.out.println("Hva er navnet på øvelsen?");
-        String navn = scanner.nextLine();
+        navn = scanner.nextLine();
         System.out.println("Skriv gjerne en beskrivelse av øvelsen (kan være tom)");
-        String beskrivelse = scanner.nextLine();
+        beskrivelse = scanner.nextLine();
         System.out.println("Hvor mye vektbelastning hadde du? (kg)");
-        int belastning = scanner.nextInt();
+        belastning = scanner.nextInt();
         System.out.println("Hvor mange repetisjoner kjørte du?");
-        int repetisjoner = scanner.nextInt();
+        repetisjoner = scanner.nextInt();
         System.out.println("Hvor mange sett gjennomførte du?");
-        int sett = scanner.nextInt();
+        sett = scanner.nextInt();
         System.out.println("Hvilken muskelgruppe trente du?");
-        String muskel = scanner.nextLine();
+        muskelgruppe = scanner.nextLine();
 
-        String øvelseSql = String.format("INSERT INTO øvelse VALUES(%d, '%s', '%s', %d)", øvelseID, navn, beskrivelse, øktID);
-        String styrkeSql = String.format("INSERT INTO styrke VALUES(%d, %d, %d, %d, '%s')", øvelseID, belastning, repetisjoner, sett, muskel);
+        String øvelseSql = String.format("INSERT INTO øvelse VALUES('%s', '%s', %d)", getNavn(), getBeskrivelse(), getØktId());
+        String styrkeSql = String.format("INSERT INTO styrke VALUES(%d, %d, %d, '%s')", getBelastning(), getRepetisjoner(), getSett(), getMuskelgruppe());
 
         System.out.println("Er du sikker på at du vil legge til denne styrkeøvelsen? (ja / nei)");
         String godkjenn =  scanner.nextLine();
@@ -134,25 +131,25 @@ public class Øvelse {
      * @param øvelseID
      * @throws SQLException
      */
-    private static void addUtholdenhetØvelse(Connection conn, Scanner scanner, int øktID, int øvelseID) throws SQLException {
+    private void addUtholdenhetØvelse(Scanner scanner, int øktID) throws SQLException {
         System.out.println("Legg til en utholdenhetsøvelse");
         System.out.println("Hva er navnet på øvelsen?");
-        String navn = scanner.nextLine();
+        navn = scanner.nextLine();
         System.out.println("Skriv gjerne en beskrivelse av øvelsen (kan være tom)");
-        String beskrivelse = scanner.nextLine();
+        beskrivelse = scanner.nextLine();
         System.out.println("Hva var lengden? (m)");
-        int lengde = scanner.nextInt();
+        lengde = scanner.nextInt();
         System.out.println("Hvor mange minutter brukte du?");
-        int minutter = scanner.nextInt();
+        antallMin = scanner.nextInt();
         //Mulig dette må endres på; vet ikke helt hvordan dette skal løses?
         System.out.println("Hvor høy puls hadde du??");
-        int puls = scanner.nextInt();
+        puls = scanner.nextInt();
         System.out.println("Hva var GPS-dataene dine?");
-        String gps = scanner.nextLine();
+        gps = scanner.nextLine();
         //Sjekk gjerne over dette ^
 
-        String øvelseSql = String.format("INSERT INTO øvelse VALUES(%d, '%s', '%s', %d)", øvelseID, navn, beskrivelse, øktID);
-        String utholdenhetSql = String.format("INSERT INTO utholdenhet VALUES(%d, %d, %d, %d, '%s')", øvelseID, lengde, minutter, puls, gps);
+        String øvelseSql = String.format("INSERT INTO øvelse VALUES('%s', '%s', %d)", getNavn(), getBeskrivelse(), getØktId());
+        String utholdenhetSql = String.format("INSERT INTO utholdenhet VALUES(%d, %d, %d, '%s')", getLengde(), getAntallMin(), getPuls(), getGPS());
 
         System.out.println("Er du sikker på at du vil legge til denne utholdenhetsøvelsen? (ja / nei)");
         String godkjenn = scanner.nextLine();
@@ -163,6 +160,20 @@ public class Øvelse {
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
+    }
+    
+    /**
+     * Henter ResultSet, eller data fra databasen for bruk i diverse get-operasjoner
+     * @param conn
+     * Koblingen til databasen
+     * @param query
+     * SQL-queryen som brukes for å hente data fra databasen
+     * @return ResultSet
+     * @throws SQLException
+     */
+    private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(query);
     }
 
 }
