@@ -63,9 +63,7 @@ public class Øvelse {
     /**
      * Legger til en øvelse, burde nok brukes i sammenheng med makeTreningsøkt
      * Kaller på addStyrke og addUtholdenhet
-     * @param conn
      * @param scanner
-     * @param øktID
      * @throws SQLException
      */
     public void addØvelse(Scanner scanner) throws SQLException {
@@ -87,10 +85,8 @@ public class Øvelse {
 
     /**
      * Legger til en styrkeøvelse, med tilhørende felt
-     * @param conn
      * @param scanner
      * @param øktID
-     * @param øvelseID
      * @throws SQLException
      */
     private void addStyrkeØvelse(Scanner scanner, int øktID) throws SQLException {
@@ -125,10 +121,8 @@ public class Øvelse {
     /**
      * Legger til en utholdenhetsøvelse, med tilhørende felt
      * Vet ikke helt hvordan puls og gps skal fungere
-     * @param conn
      * @param scanner
      * @param øktID
-     * @param øvelseID
      * @throws SQLException
      */
     private void addUtholdenhetØvelse(Scanner scanner, int øktID) throws SQLException {

@@ -15,9 +15,8 @@ public class Gruppe {
     private int subGruppeId, øvelseId;
 
     //constructor
-    public Mål(Connection conn, Statement stmt) {
+    public Gruppe(Connection conn) {
         this.conn = conn;
-        this.stmt = stmt;
     }
 
     //getters
@@ -25,5 +24,13 @@ public class Gruppe {
     public String getBeskrivelse() { return beskrivelse; }
     public int getSubGruppeId() { return subGruppeId; }
     public int getØvelseId() { return øvelseId; }
+
+    public void makeGruppe(Scanner scanner){
+        System.out.println("Hva vil du kalle gruppen?");
+        kategori = scanner.nextLine();
+        System.out.println("Gi en beskrivelse av øvelsene i gruppen: (kan være tom)");
+        beskrivelse = scanner.nextLine();
+
+    }
 
 }
