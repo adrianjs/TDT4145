@@ -119,16 +119,6 @@ public class TUI {
     }
 
     /**
-     * Skal lage grupper av øvelser
-     * Må kanskje ha øvelseID som parameter for å hente øvelser? Er sliten
-     * @param conn
-     * @param scanner
-     */
-    private static void makeØvelseGruppe(Connection conn, Scanner scanner){
-
-    }
-
-    /**
      * Regner med at vi her bare kan hente det som ligger i resultatlogg?
      * @param conn
      */
