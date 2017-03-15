@@ -8,21 +8,29 @@ public class Mål {
 
     //connection
     private Connection conn;
-    private Statement stmt;
 
     //mål
     private String mål, målType;
     private int øvelseId;
 
     //constructor
-    public Mål(Connection conn, Statement stmt) {
+    public Mål(Connection conn) {
         this.conn = conn;
-        this.stmt = stmt;
     }
 
     //getters
     public String getMål() { return mål; }
     public String getMåltype() { return målType; }
     public int getØvelseId() { return øvelseId; }
+
+    /**
+     * Skal legge til mål i databasen
+     * Må kanskje ha øktID eller øvelseID som parameter
+     * @param conn
+     * @param scanner
+     */
+    private static void addMålToØvelse(Scanner scanner){
+
+    }
 
 }

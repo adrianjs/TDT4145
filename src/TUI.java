@@ -61,9 +61,8 @@ public class TUI {
                     break;
                 case ("1"):
                     System.out.println("Registrer ny treningsøkt");
-                    //Treningsøkt økt = new Treningsøkt(conn);
-                    //økt.addNyTreningsøkt(scanner);
-                    //addNyTreningsøkt()
+                    Treningsøkt økt = new Treningsøkt(conn);
+                    økt.addNyTreningsøkt(scanner);
                     break;
                 case ("2"):
                     System.out.println("Registrer øvelser med mål");
@@ -119,15 +118,7 @@ public class TUI {
         // bruk gjerne ResultSet, se på get...Id-funksjonene for inspirasjon
     }
 
-    /**
-     * Skal legge til mål i databasen
-     * Må kanskje ha øktID eller øvelseID som parameter
-     * @param conn
-     * @param scanner
-     */
-    private static void addMålToØvelse(Connection conn, Scanner scanner){
-
-    }
+    
 
     /**
      * Skal lage grupper av øvelser

@@ -164,14 +164,13 @@ public class Øvelse {
         }
     }
 
-    private void ekstraØvelse(Scanner scanner){
+    private void ekstraØvelse(Scanner scanner) throws SQLException{
         System.out.println("Ønsker du å legge til en ekstra øvelse?");
         String godkjenn = scanner.nextLine();
         while (godkjenn.equals("ja")){
             addØvelse(scanner);
-        } else {
-            System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
+        System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
     }
     
     /**

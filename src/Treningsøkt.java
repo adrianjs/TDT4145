@@ -1,9 +1,5 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.*;
+import java.time.*;
 import java.util.Scanner;
 
 /**
@@ -61,19 +57,20 @@ public class Treningsøkt {
         System.out.println("Noen tips? (Kan være tom)");
         tips = scanner.nextLine();
         System.out.println("Var du (i)nne eller (u)te?");
-        if (scanner.nextLine() == "i") {
+        String reply = scanner.nextLine();
+        if (reply.equals("i")) {
             System.out.println("Hvordan var luften innendørs?");
             innendørsLuft = scanner.nextLine();
             System.out.println("Hvor mange tilskuere?");
             innendørsTilskuere = scanner.nextInt();
-        } else if (scanner.nextLine() == "u") {
+        } else if (reply.equals("u")) {
             System.out.println("Hvordan var været utendørs?");
             utendørsVær = scanner.nextLine();
             System.out.println("Hva var temperaturen utendørs?");
             utendørsTemperatur = scanner.nextInt();
         }
 
-        String øktSql = String.format("INSERT INTO treningsøkt VALUES('%d', %d, '%s', '%s', '%s', %d, '%s', %d)", getDatoTid(), getVarighet(), getFormål(), getTips(), getInnendørsLuft(), getInnendørsTilskuere(), getUtendørsVær(), getUtendørsTemperatur());
+        String øktSql = String.format("INSERT INTO treningsøkt VALUES(" + getDatoTid() + "%d, '%s', '%s', '%s', %d, '%s', %d)", getVarighet(), getFormål(), getTips(), getInnendørsLuft(), getInnendørsTilskuere(), getUtendørsVær(), getUtendørsTemperatur());
 
         System.out.println("Er du sikker på at du vil legge til denne treningsøkten? (ja / nei)");
         String godkjenn =  scanner.nextLine();
