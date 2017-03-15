@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class TUI {
 
     private Connection conn;
-    private Statement stmt;
 
     /**
      * Brukes for å koble til databasen.
@@ -62,6 +61,8 @@ public class TUI {
                     break;
                 case ("1"):
                     System.out.println("Registrer ny treningsøkt");
+                    //Treningsøkt økt = new Treningsøkt(conn);
+                    //økt.addNyTreningsøkt(scanner);
                     //addNyTreningsøkt()
                     break;
                 case ("2"):

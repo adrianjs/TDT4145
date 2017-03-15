@@ -8,7 +8,6 @@ public class Treningsøkt {
 
     //connection
     private Connection conn;
-    private Statement stmt;
 
     //økt
     private String dato, tidspunkt, formål, tips;
@@ -23,9 +22,8 @@ public class Treningsøkt {
     private int utendørsTemperatur;
 
     //constructor
-    public Øvelse(Connection conn, Statement stmt) {
+    public Øvelse(Connection conn) {
         this.conn = conn;
-        this.stmt = stmt;
     }
 
     //getters
@@ -40,7 +38,7 @@ public class Treningsøkt {
     public int getInnendørsTilskuere() { return innendørsTilskuere; }
 
     //legg til treningsøkt
-    public static void addNyTreningsøkt(Connection conn, Scanner scanner) throws SQLException {
+    public static void addNyTreningsøkt(Scanner scanner) throws SQLException {
         System.out.println("Legg til en treningsøkt");
         System.out.println("Når hadde du treningsøkten? (Dato: yyyy-mm-dd)");
         String dato = scanner.nextLine();
