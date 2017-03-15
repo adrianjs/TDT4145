@@ -15,24 +15,6 @@ public class Øvelse {
     int belastning, repetisjoner, sett;
     String muskelgruppe;
 
-    //constructer
-    public Øvelse (String navn, String beskrivelse, int øktId, char type, int lengde, int antallMin, int puls, String gps, int belastning, int repetisjoner, int sett, String muskelgruppe) {
-        this.øktId = øktId;
-        this.navn = navn;
-        this.beskrivelse = beskrivelse;
-        if (type == 'u') {
-            this.lengde = lengde;
-            this.antallMin = antallMin;
-            this.puls = puls;
-            this.gps = gps;
-        } else if (type == 's') {
-            this.belastning = belastning;
-            this.repetisjoner = repetisjoner;
-            this.sett = sett;
-            this.muskelgruppe = muskelgruppe;
-        }
-    }
-
     //getters
     public String getNavn() { return navn; }
     public String getBeskrivelse() { return beskrivelse; }
