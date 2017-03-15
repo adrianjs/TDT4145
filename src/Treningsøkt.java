@@ -80,13 +80,8 @@ public class Treningsøkt {
         if (godkjenn.equals("ja")){
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(øktSql);
-            System.out.println("Vil du legge til flere øvelser? (ja/nei)");
-            String nyØvelse = scanner.nextLine();
-            if (nyØvelse.equals("ja")){
-                addNyTreningsøkt(scanner);
-            } else {
-                System.out.println("Takk for denne gang.");
-            }
+            Øvelse øvelse = new Øvelse(conn);
+            øvelse.addØvelse(scanner);
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }

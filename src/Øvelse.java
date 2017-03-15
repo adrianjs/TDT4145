@@ -113,6 +113,7 @@ public class Øvelse {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(øvelseSql);
             stmt.executeUpdate(styrkeSql);
+            ekstraØvelse(scanner);
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
@@ -151,6 +152,17 @@ public class Øvelse {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(øvelseSql);
             stmt.executeUpdate(utholdenhetSql);
+            ekstraØvelse(scanner);
+        } else {
+            System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+        }
+    }
+
+    private void ekstraØvelse(Scanner scanner){
+        System.out.println("Ønsker du å legge til en ekstra øvelse?");
+        String godkjenn = scanner.nextLine();
+        while (godkjenn.equals("ja")){
+            addØvelse(scanner);
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
