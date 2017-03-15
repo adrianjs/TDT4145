@@ -40,7 +40,7 @@ public class Treningsøkt {
     public int getInnendørsTilskuere() { return innendørsTilskuere; }
 
     //legg til treningsøkt
-    public static void addNyTreningsøkt(Connection conn, Scanner scanner){
+    public static void addNyTreningsøkt(Connection conn, Scanner scanner) throws SQLException {
         System.out.println("Legg til en treningsøkt");
         System.out.println("Når hadde du treningsøkten? (Dato: yyyy-mm-dd)");
         String dato = scanner.nextLine();
