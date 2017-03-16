@@ -1,6 +1,4 @@
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -153,9 +151,6 @@ public class Resultatlogg {
 	public void generateRapport(Scanner scanner){
 		System.out.println("For hva type trening ønsker å få en rapport over din beste ytelse denne siste uken? (s)tyrke, (d)instanse eller (r)eaksjon");
 		String trainingType = scanner.nextLine();
-		LocalDateTime rightNow = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
-		String parsedDate = rightNow.format(formatter);
 		if(trainingType.equals("s")){
 			trainingType = "Styrke";
 		}
