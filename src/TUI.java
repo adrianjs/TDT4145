@@ -52,53 +52,59 @@ public class TUI {
         while (running){
             System.out.println(mainPage);
             String input = scanner.nextLine();
-            switch (input){
-                case ("9"):
-                    System.out.println("Avslutter programmet..");
-                    running = false;
-                    break;
-                case ("1"):
-                    System.out.println("Registrer ny treningsøkt");
-                    Treningsøkt økt = new Treningsøkt(conn);
-                    økt.addNyTreningsøkt(scanner);
-                    break;
-                case ("2"):
-                    System.out.println("Registrer øvelser med mål");
-                    Mål mål = new Mål(conn);
-                    mål.getAlleØkter(scanner);
-                    break;
-                case ("3"):
-                    System.out.println("Tidligere økter og resultater");
-                    //showTidligereØkter()
-                    break;
-                case ("4"):
-                    System.out.println("Legg til ny øvelse");
-                    Øvelse øvelse = new Øvelse(conn);
-                    øvelse.getAlleØkter(scanner);
-                    //velg treningsøkt først
-                    break;
-                case ("5"):
-                    System.out.println("Legg til ny øvelsesgruppe");
-                    Gruppe gruppe = new Gruppe(conn);
-                    gruppe.makeGruppe(scanner);
-                    break;
-                case ("6"):
-                    System.out.println("Generer treningslogg:");
-                    Treningsøkt treningsøkt = new Treningsøkt(conn);
-                    treningsøkt.genererStatistikk();
-                    break;
-                case ("7"):
-                    System.out.println("Legg til resultatlogg");
-                    Resultatlogg resultatlogg = new Resultatlogg(conn);
-                    resultatlogg.getAlleØkter(scanner);
-                    //velg øvelse først
-                    break;
-                case ("8"):
-                    System.out.println("Generer rapport:");
-                    Resultatlogg userReport = new Resultatlogg(conn);
-                    userReport.generateRapport(scanner);
-                    break;
-                }
+
+			try {
+				switch (input) {
+					case ("9"):
+						System.out.println("Avslutter programmet..");
+						running = false;
+						break;
+					case ("1"):
+						System.out.println("Registrer ny treningsøkt");
+						Treningsøkt økt = new Treningsøkt(conn);
+						økt.addNyTreningsøkt(scanner);
+						break;
+					case ("2"):
+						System.out.println("Registrer øvelser med mål");
+						Mål mål = new Mål(conn);
+						mål.getAlleØkter(scanner);
+						//velg øvelse først
+						break;
+					case ("3"):
+						System.out.println("Tidligere økter og resultater");
+						//showTidligereØkter()
+						break;
+					case ("4"):
+						System.out.println("Legg til ny øvelse");
+						Øvelse øvelse = new Øvelse(conn);
+						øvelse.getAlleØkter(scanner);
+						//velg treningsøkt først
+						break;
+					case ("5"):
+						System.out.println("Legg til ny øvelsesgruppe");
+						Gruppe gruppe = new Gruppe(conn);
+						gruppe.makeGruppe(scanner);
+						break;
+					case ("6"):
+						System.out.println("Generer treningslogg:");
+						Treningsøkt treningsøkt = new Treningsøkt(conn);
+						treningsøkt.genererStatistikk();
+						break;
+					case ("7"):
+						System.out.println("Legg til resultatlogg");
+						Resultatlogg resultatlogg = new Resultatlogg(conn);
+						resultatlogg.getAlleØkter(scanner);
+						//velg øvelse først
+						break;
+					case ("8"):
+						System.out.println("Generer rapport:");
+						Resultatlogg userReport = new Resultatlogg(conn);
+						userReport.generateRapport(scanner);
+						break;
+				}
+			} catch (Exception e){
+				System.out.println("Det skjedde en feil under inntastingen");
+			}
             }
         }
 
