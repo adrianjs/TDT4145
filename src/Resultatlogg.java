@@ -32,7 +32,6 @@ public class Resultatlogg {
     /**
      * Skal legge til resultatlogg i databasen
      * Må kanskje ha idResultatLogg eller øvelseID som parameter
-     * @param conn
      * @param scanner
      */
     public void addResultatloggToØvelse(Scanner scanner) throws SQLException {
@@ -163,7 +162,7 @@ public class Resultatlogg {
 		else if(trainingType.equals("d")){
 			trainingType = "Distanse";
 		}
-		String besteSQL = String.format("SELECT resultatlogg.Resultater, resultatlogg.Beste, resultatlogg.Måltype, øvelse.navn, øvelse.beskrivelse, treningsøkt.dato, treningsøkt.varighet FROM resultatlogg INNER JOIN øvelse ON resultatlogg.øvelseID = øvelse.øvelseID INNER JOIN treningsøkt ON treningsøkt.øktID = øvelse.øktID HAVING resultatlogg.Måltype = '%s' AND treningsøkt.dato >= now()-INTERVAL 7 day", trainingType);
+		String besteSQL = String.format("SELECT resultatlogg.Resultater, resultatlogg.Beste, resultatlogg.Måltype, øvelse.navn, øvelse.beskrivelse, treningsøkt.datotid, treningsøkt.varighet FROM resultatlogg INNER JOIN øvelse ON resultatlogg.øvelseID = øvelse.øvelseID INNER JOIN treningsøkt ON treningsøkt.øktID = øvelse.øktID HAVING resultatlogg.Måltype = '%s' AND treningsøkt.datotid >= now()-INTERVAL 7 day", trainingType);
 		ArrayList<String> resultsArray = new ArrayList<>();
 		try {
 			Statement stmt = conn.createStatement();
@@ -177,7 +176,7 @@ public class Resultatlogg {
 					resultsArray.add(rs.getString("Måltype"));
 					resultsArray.add(rs.getString("navn"));
 					resultsArray.add(rs.getString("Resultater"));
-					resultsArray.add(rs.getString("dato"));
+					resultsArray.add(rs.getString("datotid"));
 					resultsArray.add(rs.getString("varighet"));
 
 				}
@@ -186,11 +185,15 @@ public class Resultatlogg {
 			System.out.println(e);
 			System.out.println("Something went wrong in communicating with the database.");
 		}
+		try{
+			System.out.println("Din beste" + trainingType + "trening denne uken var:");
+			System.out.println(resultsArray.get(0).toString());
+			System.out.println(" Den " + resultsArray.get(3).toString() + " Da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
+			System.out.println("Press en vilkårlig tast for å fortsette");}
+		catch (Exception e){
+			System.out.println("Du har ikke trent denne uken, så det er ingenting å vise :)");
+		}
 
-		System.out.println("Din beste" + trainingType + "trening denne uken var:");
-		System.out.println(resultsArray.get(0).toString());
-		System.out.println(" Den " + resultsArray.get(3).toString() + " Da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
-		System.out.println("Press en vilkårlig tast for å fortsette");
 		scanner.nextLine();
 		return;
 	}
