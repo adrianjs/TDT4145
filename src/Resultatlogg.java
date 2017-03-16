@@ -11,7 +11,7 @@ public class Resultatlogg {
 
     //resultatlogg
     private String resultater, beste, målType;
-    private int øvelseId, resultatloggId;
+    private int øvelseId, resultatloggId, øktId;
 
     //constructor
     public Resultatlogg(Connection conn) {
@@ -25,6 +25,7 @@ public class Resultatlogg {
     public String getMålType() { return målType; }
     public int getØvelseId() { return øvelseId; }
     public int getResultId() { return resultatloggId; }
+    public int getØktId() { return øktId; }
 
     /**
      * Skal legge til resultatlogg i databasen
@@ -104,6 +105,22 @@ public class Resultatlogg {
     private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
+    }
+
+    public void getAlleØkter(Scanner scanner) {
+        System.out.println("Velg deg en treningsøkt");
+        //print ut alle treningsøkter og deres id
+        System.out.println("Skriv inn ID til treningsøkten din");
+        øktId = Integer.parseInt(scanner.nextLine()));
+        getAlleØvelser(scanner);
+    }
+
+    public void getAlleØvelser(Scanner scanner) {
+        System.out.println("Velg deg en øvelse");
+        //print ut alle øvelser og deres id
+        System.out.println("Skriv inn ID til øvelsen din");
+        øvelseId = Integer.parseInt(scanner.nextLine()));
+        addMålToØvelse(scanner);
     }
 
 }

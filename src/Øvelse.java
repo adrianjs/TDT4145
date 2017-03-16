@@ -155,7 +155,7 @@ public class Øvelse {
      * @param conn
      * @return øvelseID eller 0
      */
-    public int getØvelseIDFromDB(Connection conn){
+    public int getØvelseIDFromDB(Connection conn) {
         String query = "SELECT øvelseID FROM øvelse ORDER BY øvelseID DESC LIMIT 1";
         try {
             ResultSet rs = getResultSet(conn, query);
@@ -174,7 +174,7 @@ public class Øvelse {
      * @param conn
      * @return øktID eller 0
      */
-    public int getØktIdFromDB(Connection conn){
+    public int getØktIdFromDB(Connection conn) {
         String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
         try {
             ResultSet rs = getResultSet(conn, query);
@@ -200,6 +200,14 @@ public class Øvelse {
     private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
+    }
+
+    public void getAlleØkter(Scanner scanner) {
+        System.out.println("Velg deg en treningsøkt");
+        //print ut alle treningsøkter og deres id
+        System.out.println("Skriv inn ID til treningsøkten din");
+        øktId = Integer.parseInt(scanner.nextLine()));
+        addØvelse(scanner);
     }
 
 }

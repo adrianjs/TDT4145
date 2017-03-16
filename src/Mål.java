@@ -11,7 +11,7 @@ public class Mål {
 
     //mål
     private String mål, målType;
-    private int målId, øvelseId;
+    private int målId, øvelseId, øktId;
 
     //constructor
     public Mål(Connection conn) {
@@ -23,6 +23,7 @@ public class Mål {
     public String getMål() { return mål; }
     public String getMåltype() { return målType; }
     public int getØvelseId() { return øvelseId; }
+    public int getØktId() { return øktId; }
     public int getMålId() { return målId; }
 
     /**
@@ -101,6 +102,22 @@ public class Mål {
     private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
+    }
+
+    public void getAlleØkter(Scanner scanner) {
+        System.out.println("Velg deg en treningsøkt");
+        //print ut alle treningsøkter og deres id
+        System.out.println("Skriv inn ID til treningsøkten din");
+        øktId = Integer.parseInt(scanner.nextLine()));
+        getAlleØvelser(scanner);
+    }
+
+    public void getAlleØvelser(Scanner scanner) {
+        System.out.println("Velg deg en øvelse");
+        //print ut alle øvelser og deres id
+        System.out.println("Skriv inn ID til øvelsen din");
+        øvelseId = Integer.parseInt(scanner.nextLine()));
+        addMålToØvelse(scanner);
     }
 
 }
