@@ -17,7 +17,7 @@ public class TUI {
     public static Connection connect(Connection conn) throws Exception {
         String userName = "root";
         String password = "root";
-        String url = "jdbc:mysql://localhost:3306/";
+        String url = "jdbc:mysql://localhost:3306/tdt4145";
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         conn = DriverManager.getConnection(url, userName, password);
         if (conn != null){
@@ -74,7 +74,9 @@ public class TUI {
                     break;
                 case ("4"):
                     System.out.println("Legg til ny øvelse");
-                    //addØvelse()
+                    Øvelse øvelse = new Øvelse(conn);
+                    øvelse.addØvelse(scanner);
+                    //velg treningsøkt først
                     break;
                 case ("5"):
                     System.out.println("Legg til ny øvelsesgruppe");
@@ -87,26 +89,6 @@ public class TUI {
                 }
             }
         }
-
-    /**
-     * Henter øvelseID for bruk i programmet
-     * @param conn
-     * @return øvelseID eller 0
-     */
-    private static int getØvelseID(Connection conn){
-        String query = "SELECT øvelseID FROM øvelse ORDER BY øvelseID DESC LIMIT 1";
-        try {
-            ResultSet rs = getResultSet(conn, query);
-            if (rs.next()){
-                int øvelseID = rs.getInt("øvelseID") + 1;
-                System.out.println("ØvelseID: " + øvelseID);
-                return øvelseID;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 
     /**
      * Skal hente alle øktene som ligger lagret i databasen, det blir vel rett? Eller?

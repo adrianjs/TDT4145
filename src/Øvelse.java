@@ -11,7 +11,7 @@ public class Øvelse {
 
     //øvelse
     private String navn, beskrivelse;
-    private int øktId;
+    private int øktId, øvelseId;
 
     //utholdenhet
     private int lengde, antallMin, puls;
@@ -31,6 +31,7 @@ public class Øvelse {
     public String getNavn() { return navn; }
     public String getBeskrivelse() { return beskrivelse; }
     public int getØktId() { return øktId; }
+    public int getØvelseId() { return øvelseId; }
     public int getLengde() { return lengde; }
     public int getAntallMin() { return antallMin; }
     public int getPuls() { return puls; }
@@ -40,25 +41,7 @@ public class Øvelse {
     public int getSett() { return sett; }
     public String getMuskelgruppe() { return muskelgruppe; }
 
-    /**
-     * Henter øktID for bruk i programmet
-     * @param conn
-     * @return øktID eller 0
-     */
-    public int getØktIdFromDB(Connection conn){
-        String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
-        try {
-            ResultSet rs = getResultSet(conn, query);
-            if (rs.next()){
-                int øktID = rs.getInt("øktID") + 1;
-                System.out.println("ØktID: " + øktID);
-                return øktID;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+    
 
     /**
      * Legger til en øvelse, burde nok brukes i sammenheng med makeTreningsøkt
@@ -96,16 +79,16 @@ public class Øvelse {
         System.out.println("Skriv gjerne en beskrivelse av øvelsen (kan være tom)");
         beskrivelse = scanner.nextLine();
         System.out.println("Hvor mye vektbelastning hadde du? (kg)");
-        belastning = scanner.nextInt();
+        belastning = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvor mange repetisjoner kjørte du?");
-        repetisjoner = scanner.nextInt();
+        repetisjoner = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvor mange sett gjennomførte du?");
-        sett = scanner.nextInt();
+        sett = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvilken muskelgruppe trente du?");
         muskelgruppe = scanner.nextLine();
 
-        String øvelseSql = String.format("INSERT INTO øvelse VALUES('%s', '%s', %d)", getNavn(), getBeskrivelse(), getØktId());
-        String styrkeSql = String.format("INSERT INTO styrke VALUES(%d, %d, %d, '%s')", getBelastning(), getRepetisjoner(), getSett(), getMuskelgruppe());
+        String øvelseSql = String.format("INSERT INTO øvelse VALUES(%d, '%s', '%s', %d)", getØvelseId(), getNavn(), getBeskrivelse(), getØktId());
+        String styrkeSql = String.format("INSERT INTO styrke VALUES(%d, %d, %d, %d, '%s')", getØvelseId(), getBelastning(), getRepetisjoner(), getSett(), getMuskelgruppe());
 
         System.out.println("Er du sikker på at du vil legge til denne styrkeøvelsen? (ja / nei)");
         String godkjenn =  scanner.nextLine();
@@ -133,18 +116,18 @@ public class Øvelse {
         System.out.println("Skriv gjerne en beskrivelse av øvelsen (kan være tom)");
         beskrivelse = scanner.nextLine();
         System.out.println("Hva var lengden? (m)");
-        lengde = scanner.nextInt();
+        lengde = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvor mange minutter brukte du?");
-        antallMin = scanner.nextInt();
+        antallMin = Integer.parseInt(scanner.nextLine());
         //Mulig dette må endres på; vet ikke helt hvordan dette skal løses?
         System.out.println("Hvor høy puls hadde du??");
-        puls = scanner.nextInt();
+        puls = Integer.parseInt(scanner.nextLine());
         System.out.println("Hva var GPS-dataene dine?");
         gps = scanner.nextLine();
         //Sjekk gjerne over dette ^
 
-        String øvelseSql = String.format("INSERT INTO øvelse VALUES('%s', '%s', %d)", getNavn(), getBeskrivelse(), getØktId());
-        String utholdenhetSql = String.format("INSERT INTO utholdenhet VALUES(%d, %d, %d, '%s')", getLengde(), getAntallMin(), getPuls(), getGPS());
+        String øvelseSql = String.format("INSERT INTO øvelse VALUES(%d, '%s', '%s', %d)", getØvelseId(), getNavn(), getBeskrivelse(), getØktId());
+        String utholdenhetSql = String.format("INSERT INTO utholdenhet VALUES(%d, %d, %d, %d, '%s')", getØvelseId(), getLengde(), getAntallMin(), getPuls(), getGPS());
 
         System.out.println("Er du sikker på at du vil legge til denne utholdenhetsøvelsen? (ja / nei)");
         String godkjenn = scanner.nextLine();
@@ -159,12 +142,52 @@ public class Øvelse {
     }
 
     private void ekstraØvelse(Scanner scanner) throws SQLException{
-        System.out.println("Ønsker du å legge til en ekstra øvelse?");
+        System.out.println("Ønsker du å legge til en ekstra øvelse? (ja / nei)");
         String godkjenn = scanner.nextLine();
         while (godkjenn.equals("ja")){
             addØvelse(scanner);
         }
         System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+    }
+    
+    /**
+     * Henter øvelseID for bruk i programmet
+     * @param conn
+     * @return øvelseID eller 0
+     */
+    public int getØvelseIDFromDB(Connection conn){
+        String query = "SELECT øvelseID FROM øvelse ORDER BY øvelseID DESC LIMIT 1";
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            if (rs.next()){
+                int øvelseID = rs.getInt("øvelseID") + 1;
+                System.out.println("ØvelseID: " + øvelseID);
+                return øvelseID;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Henter øktID for bruk i programmet
+     * @param conn
+     * @return øktID eller 0
+     */
+    public int getØktIdFromDB(Connection conn){
+        String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            if (rs.next()){
+                int øktID = rs.getInt("øktID");
+                System.out.println("ØktID: " + øktID);
+                return øktID;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
     
     /**

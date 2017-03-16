@@ -12,8 +12,8 @@ public class Treningsøkt {
 
     //økt
     private String formål, tips;
-    private int varighet;
-    private LocalDateTime datoTid;
+    private int varighet, øktId;
+    private Timestamp datoTid;
 
     //innendørs
     private String innendørsLuft;
@@ -26,10 +26,11 @@ public class Treningsøkt {
     //constructor
     public Treningsøkt(Connection conn) {
         this.conn = conn;
+        this.øktId = getØktIdFromDB(conn);
     }
 
     //getters
-    public LocalDateTime getDatoTid() { return datoTid; }
+    public Timestamp getDatoTid() { return datoTid; }
     public int getVarighet() { return varighet; }
     public String getFormål() { return formål; }
     public String getTips() { return tips; }
@@ -37,9 +38,11 @@ public class Treningsøkt {
     public int getUtendørsTemperatur() { return utendørsTemperatur; }
     public String getInnendørsLuft() { return innendørsLuft; }
     public int getInnendørsTilskuere() { return innendørsTilskuere; }
+    public int getØktId() { return øktId; }
 
     //legg til treningsøkt
-    public void addNyTreningsøkt(Scanner scanner) throws SQLException {
+    @SuppressWarnings("deprecation")
+	public void addNyTreningsøkt(Scanner scanner) throws SQLException {
         System.out.println("Legg til en treningsøkt");
         System.out.println("Når hadde du treningsøkten? (Format: yyyy-mm-dd-hh-mm)");
         String dateTime = scanner.nextLine();
@@ -49,9 +52,9 @@ public class Treningsøkt {
         int dateDay = Integer.parseInt(oppdeltDatoTid[2]);
         int timeHour = Integer.parseInt(oppdeltDatoTid[3]);
         int timeMinute = Integer.parseInt(oppdeltDatoTid[4]);
-        datoTid = LocalDateTime.of(dateYear, dateMonth, dateDay, timeHour, timeMinute);
+        datoTid = new Timestamp(dateYear-1900, dateMonth-1, dateDay, timeHour, timeMinute, 0, 0);
         System.out.println("Hvor lenge varte økten?");
-        varighet = scanner.nextInt();
+        varighet = Integer.parseInt(scanner.nextLine());
         System.out.println("Hva var formålet med økten? (Kan være tom)");
         formål = scanner.nextLine();
         System.out.println("Noen tips? (Kan være tom)");
@@ -62,16 +65,17 @@ public class Treningsøkt {
             System.out.println("Hvordan var luften innendørs?");
             innendørsLuft = scanner.nextLine();
             System.out.println("Hvor mange tilskuere?");
-            innendørsTilskuere = scanner.nextInt();
+            innendørsTilskuere = Integer.parseInt(scanner.nextLine());;
         } else if (reply.equals("u")) {
             System.out.println("Hvordan var været utendørs?");
             utendørsVær = scanner.nextLine();
             System.out.println("Hva var temperaturen utendørs?");
-            utendørsTemperatur = scanner.nextInt();
+            utendørsTemperatur = Integer.parseInt(scanner.nextLine());
         }
 
-        String øktSql = String.format("INSERT INTO treningsøkt VALUES(" + getDatoTid() + "%d, '%s', '%s', '%s', %d, '%s', %d)", getVarighet(), getFormål(), getTips(), getInnendørsLuft(), getInnendørsTilskuere(), getUtendørsVær(), getUtendørsTemperatur());
-
+        String øktSql = String.format("INSERT INTO treningsøkt VALUES(%d,'" + getDatoTid() + "', %d, '%s', '%s', '%s', %d, '%s', %d)", getØktId(), getVarighet(), getFormål(), getTips(), getUtendørsVær(), getUtendørsTemperatur(), getInnendørsLuft(), getInnendørsTilskuere());
+        System.out.println(øktSql);
+        
         System.out.println("Er du sikker på at du vil legge til denne treningsøkten? (ja / nei)");
         String godkjenn =  scanner.nextLine();
         if (godkjenn.equals("ja")){
@@ -82,6 +86,40 @@ public class Treningsøkt {
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
+    }
+    
+    /**
+     * Henter øktID for bruk i programmet
+     * @param conn
+     * @return øktID eller 0
+     */
+    public int getØktIdFromDB(Connection conn){
+        String query = "SELECT øktID FROM treningsøkt ORDER BY øktID DESC LIMIT 1";
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            if (rs.next()){
+                int øktID = rs.getInt("øktID") + 1;
+                System.out.println("ØktID: " + øktID);
+                return øktID;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    /**
+     * Henter ResultSet, eller data fra databasen for bruk i diverse get-operasjoner
+     * @param conn
+     * Koblingen til databasen
+     * @param query
+     * SQL-queryen som brukes for å hente data fra databasen
+     * @return ResultSet
+     * @throws SQLException
+     */
+    private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(query);
     }
 
 }
