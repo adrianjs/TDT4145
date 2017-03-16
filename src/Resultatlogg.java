@@ -44,7 +44,7 @@ public class Resultatlogg {
         System.out.println("Hva slags type mål er det?");
         målType = scanner.nextLine();
 
-        String målSql = String.format("INSERT INTO resultatlogg VALUES(%d, '%s', '%s', '$s', %d)", getResultId(), getResultater(), getBeste(), getMålType(), getØvelseId());
+        String målSql = String.format("INSERT INTO resultatlogg VALUES(%d, '%s', '%s', '%s', %d)", getResultId(), getResultater(), getBeste(), getMålType(), getØvelseId());
 
         System.out.println("Er du sikker på at du vil legge til dette målet? (ja / nei)");
         String godkjenn =  scanner.nextLine();
