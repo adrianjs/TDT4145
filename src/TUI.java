@@ -40,13 +40,12 @@ public class TUI {
                 "Vennligst velg en av disse kategoriene: \n" +
                 "1. Registrer ny treningsøkt \n" +
                 "2. Registrer mål for øvelser \n" +
-                "3. Tidligere økter og resultater \n" +
-                "4. Legg til nye øvelser \n" +
-                "5. Lag ny øvelsesgruppe \n" +
-                "6. Treningslogg \n" +
-                "7. Legg til resultatlogg \n" +
-                "8. Treningsrapport \n" +
-                "9. Avslutt";
+                "3. Legg til nye øvelser \n" +
+                "4. Lag ny øvelsesgruppe \n" +
+                "5. Treningslogg \n" +
+                "6. Legg til resultatlogg \n" +
+                "7. Treningsrapport \n" +
+                "8. Avslutt";
 
         boolean running = true;
         while (running){
@@ -55,7 +54,7 @@ public class TUI {
 
 			try {
 				switch (input) {
-					case ("9"):
+					case ("8"):
 						System.out.println("Avslutter programmet..");
 						running = false;
 						break;
@@ -71,32 +70,28 @@ public class TUI {
 						//velg øvelse først
 						break;
 					case ("3"):
-						System.out.println("Tidligere økter og resultater");
-						//showTidligereØkter()
-						break;
-					case ("4"):
 						System.out.println("Legg til ny øvelse");
 						Øvelse øvelse = new Øvelse(conn);
 						øvelse.getAlleØkter(scanner);
 						//velg treningsøkt først
 						break;
-					case ("5"):
+					case ("4"):
 						System.out.println("Legg til ny øvelsesgruppe");
 						Gruppe gruppe = new Gruppe(conn);
 						gruppe.makeGruppe(scanner);
 						break;
-					case ("6"):
+					case ("5"):
 						System.out.println("Generer treningslogg:");
 						Treningsøkt treningsøkt = new Treningsøkt(conn);
 						treningsøkt.genererStatistikk();
 						break;
-					case ("7"):
+					case ("6"):
 						System.out.println("Legg til resultatlogg");
 						Resultatlogg resultatlogg = new Resultatlogg(conn);
 						resultatlogg.getAlleØkter(scanner);
 						//velg øvelse først
 						break;
-					case ("8"):
+					case ("7"):
 						System.out.println("Generer rapport:");
 						Resultatlogg userReport = new Resultatlogg(conn);
 						userReport.generateRapport(scanner);
