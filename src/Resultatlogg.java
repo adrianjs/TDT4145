@@ -151,7 +151,7 @@ public class Resultatlogg {
     }
   
 	public void generateRapport(Scanner scanner){
-		System.out.println("For hva type trening ønsker å få en rapport over din beste ytelse denne siste uken? (s)tyrke, (d)instanse");
+		System.out.println("For hva type trening ønsker å få en rapport over din beste ytelse denne siste uken? (s)tyrke, (d)instanse eller (r)eaksjon");
 		String trainingType = scanner.nextLine();
 		LocalDateTime rightNow = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
@@ -161,6 +161,12 @@ public class Resultatlogg {
 		}
 		else if(trainingType.equals("d")){
 			trainingType = "Distanse";
+		}
+		else if(trainingType.equals("r")){
+			trainingType = "Reaksjon";
+		}
+		else{
+			System.out.println("Du ga ikke et gyldig svar");
 		}
 		String besteSQL = String.format("SELECT resultatlogg.Resultater, resultatlogg.Beste, resultatlogg.Måltype, øvelse.navn, øvelse.beskrivelse, treningsøkt.datotid, treningsøkt.varighet FROM resultatlogg INNER JOIN øvelse ON resultatlogg.øvelseID = øvelse.øvelseID INNER JOIN treningsøkt ON treningsøkt.øktID = øvelse.øktID HAVING resultatlogg.Måltype = '%s' AND treningsøkt.datotid >= now()-INTERVAL 7 day", trainingType);
 		ArrayList<String> resultsArray = new ArrayList<>();
@@ -186,9 +192,9 @@ public class Resultatlogg {
 			System.out.println("Something went wrong in communicating with the database.");
 		}
 		try{
-			System.out.println("Din beste" + trainingType + "trening denne uken var:");
-			System.out.println(resultsArray.get(0).toString());
-			System.out.println(" Den " + resultsArray.get(3).toString() + " Da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
+			System.out.println("Din beste " + trainingType + "trening denne uken var:");
+			//System.out.println(resultsArray.get(0).toString());
+			System.out.println("Den " + resultsArray.get(3).toString() + " da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
 			System.out.println("Press en vilkårlig tast for å fortsette");}
 		catch (Exception e){
 			System.out.println("Du har ikke trent denne uken, så det er ingenting å vise :)");
