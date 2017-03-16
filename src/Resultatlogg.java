@@ -193,7 +193,6 @@ public class Resultatlogg {
 		}
 		try{
 			System.out.println("Din beste " + trainingType + "trening denne uken var:");
-			//System.out.println(resultsArray.get(0).toString());
 			System.out.println("Den " + resultsArray.get(3).toString() + " da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
 			System.out.println("Press en vilkårlig tast for å fortsette");}
 		catch (Exception e){
