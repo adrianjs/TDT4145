@@ -1,9 +1,7 @@
 import java.sql.*;
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
