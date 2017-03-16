@@ -47,6 +47,7 @@ public class Mål {
         if (godkjenn.equals("ja")){
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(målSql);
+            ekstraMål(scanner);
         } else {
             System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
         }
@@ -103,20 +104,45 @@ public class Mål {
         Statement stmt = conn.createStatement();
         return stmt.executeQuery(query);
     }
+    
+    private void ekstraMål(Scanner scanner) throws SQLException{
+        System.out.println("Ønsker du å legge til en ekstra mål? (ja / nei)");
+        String godkjenn = scanner.nextLine();
+        while (godkjenn.equals("ja")){
+        	addMålToØvelse(scanner);
+        }
+        System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+    }
 
-    public void getAlleØkter(Scanner scanner) {
+    public void getAlleØkter(Scanner scanner) throws SQLException {
         System.out.println("Velg deg en treningsøkt");
-        //print ut alle treningsøkter og deres id
+        String query = "SELECT øktId, datotid, formål FROM treningsøkt";
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            while (rs.next()){
+                System.out.println(rs.getInt("øktId") + ", " + rs.getDate("datotid") + ", " + rs.getString("formål"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("Skriv inn ID til treningsøkten din");
-        øktId = Integer.parseInt(scanner.nextLine()));
+        øktId = Integer.parseInt(scanner.nextLine());
         getAlleØvelser(scanner);
     }
 
-    public void getAlleØvelser(Scanner scanner) {
+    public void getAlleØvelser(Scanner scanner) throws SQLException {
         System.out.println("Velg deg en øvelse");
-        //print ut alle øvelser og deres id
+        String query = "SELECT øvelseId, navn FROM øvelse WHERE øktId=" + øktId;
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            while (rs.next()){
+                System.out.println(rs.getInt("øvelseId") + ", " + rs.getString("navn"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("Skriv inn ID til øvelsen din");
-        øvelseId = Integer.parseInt(scanner.nextLine()));
+        øvelseId = Integer.parseInt(scanner.nextLine());
         addMålToØvelse(scanner);
     }
 

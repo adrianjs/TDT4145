@@ -202,11 +202,20 @@ public class Øvelse {
         return stmt.executeQuery(query);
     }
 
-    public void getAlleØkter(Scanner scanner) {
+    public void getAlleØkter(Scanner scanner) throws SQLException {
         System.out.println("Velg deg en treningsøkt");
+        String query = "SELECT øktId, datotid, formål FROM treningsøkt";
+        try {
+            ResultSet rs = getResultSet(conn, query);
+            while (rs.next()){
+                System.out.println(rs.getInt("øktId") + ", " + rs.getDate("datotid") + ", " + rs.getString("formål"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //print ut alle treningsøkter og deres id
         System.out.println("Skriv inn ID til treningsøkten din");
-        øktId = Integer.parseInt(scanner.nextLine()));
+        øktId = Integer.parseInt(scanner.nextLine());
         addØvelse(scanner);
     }
 
