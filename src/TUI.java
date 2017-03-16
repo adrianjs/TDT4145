@@ -48,9 +48,7 @@ public class TUI {
                 "8. Treningsrapport \n" +
                 "9. Avslutt";
 
-
         boolean running = true;
-
         while (running){
             System.out.println(mainPage);
             String input = scanner.nextLine();
@@ -68,7 +66,6 @@ public class TUI {
                     System.out.println("Registrer øvelser med mål");
                     Mål mål = new Mål(conn);
                     mål.getAlleØkter(scanner);
-                    //velg øvelse først
                     break;
                 case ("3"):
                     System.out.println("Tidligere økter og resultater");
@@ -105,59 +102,6 @@ public class TUI {
             }
         }
 
-    /**
-     * Skal hente alle øktene som ligger lagret i databasen, det blir vel rett? Eller?
-     * @param conn
-     */
-    private static void showTidligereØkter(Connection conn){
-        // kanskje String query = "SELECT * FROM resultatlogg"; ?
-        // Hent det som trengs for å vise tidligere økter og resultater
-        // bruk gjerne ResultSet, se på get...Id-funksjonene for inspirasjon
-    }
-
-    /**
-     * Regner med at vi her bare kan hente det som ligger i resultatlogg?
-     * @param conn
-     */
-    private static void getTreningslogg(Connection conn){
-        String query = "SELECT * FROM resultatlogg";
-        try {
-            ResultSet rs = getResultSet(conn, query);
-            while(rs.next()){
-                String resultater = rs.getString("Resultater");
-                String beste = rs.getString("Beste");
-                String måltype = rs.getString("Måltype");
-                int øvelseID = rs.getInt("Øvelse_øvelseID");
-                int øktID = rs.getInt("Øvelse_øktID");
-
-                System.out.println(String.format("ØktID: %d \n" +
-                        "ØvelseID: %d \n" +
-                        "Resultater: %s \n" +
-                        "Beste: %s \n" +
-                        "Måltype: %s \n\n"));
-
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * Henter ResultSet, eller data fra databasen for bruk i diverse get-operasjoner
-     * @param conn
-     * Koblingen til databasen
-     * @param query
-     * SQL-queryen som brukes for å hente data fra databasen
-     * @return ResultSet
-     * @throws SQLException
-     */
-    private static ResultSet getResultSet(Connection conn, String query) throws SQLException {
-        Statement stmt = conn.createStatement();
-        return stmt.executeQuery(query);
-    }
-
     public static void main(String[] args) {
         Connection conn = null;
         try {
@@ -175,7 +119,5 @@ public class TUI {
             }
         }
     }
-
-
-
+    
 }
