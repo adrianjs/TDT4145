@@ -46,7 +46,8 @@ public class TUI {
                 "6. Treningslogg \n" +
                 "7. Legg til resultatlogg \n" +
                 "8. Treningsrapport \n" +
-                "9. Avslutt";
+                "9. Statistikk \n" +
+                "10. Avslutt";
 
 
         boolean running = true;
@@ -55,7 +56,7 @@ public class TUI {
             System.out.println(mainPage);
             String input = scanner.nextLine();
             switch (input){
-                case ("9"):
+                case ("10"):
                     System.out.println("Avslutter programmet..");
                     running = false;
                     break;
@@ -99,6 +100,11 @@ public class TUI {
                     System.out.println("Generer rapport:");
                     Resultatlogg userReport = new Resultatlogg(conn);
                     userReport.generateRapport(scanner);
+                    break;
+                case ("9"):
+                    System.out.println("Generer statistikk:");
+                    Treningsøkt treningsøkt = new Treningsøkt(conn);
+                    treningsøkt.genererStatistikk();
                     break;
                 }
             }
