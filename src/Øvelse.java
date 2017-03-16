@@ -25,6 +25,7 @@ public class Øvelse {
     public Øvelse(Connection conn) {
         this.conn = conn;
         this.øktId = getØktIdFromDB(conn);
+        this.øvelseId = getØvelseIDFromDB(conn);
     }
 
     //getters
@@ -86,6 +87,7 @@ public class Øvelse {
         sett = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvilken muskelgruppe trente du?");
         muskelgruppe = scanner.nextLine();
+        System.out.println(getØvelseId());
 
         String øvelseSql = String.format("INSERT INTO øvelse VALUES(%d, '%s', '%s', %d)", getØvelseId(), getNavn(), getBeskrivelse(), getØktId());
         String styrkeSql = String.format("INSERT INTO styrke VALUES(%d, %d, %d, %d, '%s')", getØvelseId(), getBelastning(), getRepetisjoner(), getSett(), getMuskelgruppe());
