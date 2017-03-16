@@ -149,16 +149,13 @@ public class Resultatlogg {
     }
   
 	public void generateRapport(Scanner scanner){
-		System.out.println("For hva type trening ønsker å få en rapport over din beste ytelse denne siste uken? (s)tyrke, (d)instanse eller (r)eaksjon");
+		System.out.println("For hva type trening ønsker å få en rapport over din beste ytelse denne siste uken? (s)tyrke, (d)instanse");
 		String trainingType = scanner.nextLine();
 		if(trainingType.equals("s")){
 			trainingType = "Styrke";
 		}
 		else if(trainingType.equals("d")){
 			trainingType = "Distanse";
-		}
-		else if(trainingType.equals("r")){
-			trainingType = "Reaksjon";
 		}
 		else{
 			System.out.println("Du ga ikke et gyldig svar");
@@ -189,11 +186,11 @@ public class Resultatlogg {
 		try{
 			System.out.println("Din beste " + trainingType + "trening denne uken var:");
 			System.out.println("Den " + resultsArray.get(3).toString() + " da brukte du " + resultsArray.get(4).toString() + " min på å gjennomføre " + resultsArray.get(2).toString() + " med " + resultsArray.get(1).toString());
-			System.out.println("Press en vilkårlig tast for å fortsette");}
+		}
 		catch (Exception e){
 			System.out.println("Du har ikke trent denne uken, så det er ingenting å vise :)");
 		}
-
+		System.out.println("Press en vilkårlig tast for å fortsette");
 		scanner.nextLine();
 		return;
 	}

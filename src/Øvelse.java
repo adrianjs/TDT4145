@@ -81,9 +81,9 @@ public class Øvelse {
         beskrivelse = scanner.nextLine();
         System.out.println("Hvor mye vektbelastning hadde du? (kg)");
         belastning = Integer.parseInt(scanner.nextLine());
-        System.out.println("Hvor mange repetisjoner kjørte du?");
+        System.out.println("Hvor mange repetisjoner kjørte du? (oppgi nummer)");
         repetisjoner = Integer.parseInt(scanner.nextLine());
-        System.out.println("Hvor mange sett gjennomførte du?");
+        System.out.println("Hvor mange sett gjennomførte du? (oppgi nummer)");
         sett = Integer.parseInt(scanner.nextLine());
         System.out.println("Hvilken muskelgruppe trente du?");
         muskelgruppe = scanner.nextLine();
@@ -121,7 +121,7 @@ public class Øvelse {
         System.out.println("Hvor mange minutter brukte du?");
         antallMin = Integer.parseInt(scanner.nextLine());
         //Mulig dette må endres på; vet ikke helt hvordan dette skal løses?
-        System.out.println("Hvor høy puls hadde du??");
+        System.out.println("Hvor høy puls hadde du?");
         puls = Integer.parseInt(scanner.nextLine());
         System.out.println("Hva var GPS-dataene dine?");
         gps = scanner.nextLine();

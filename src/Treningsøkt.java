@@ -52,7 +52,7 @@ public class Treningsøkt {
         int timeHour = Integer.parseInt(oppdeltDatoTid[3]);
         int timeMinute = Integer.parseInt(oppdeltDatoTid[4]);
         datoTid = new Timestamp(dateYear-1900, dateMonth-1, dateDay, timeHour, timeMinute, 0, 0);
-        System.out.println("Hvor lenge varte økten?");
+        System.out.println("Hvor lenge varte økten? (oppgi i min)");
         varighet = Integer.parseInt(scanner.nextLine());
         System.out.println("Hva var formålet med økten? (Kan være tom)");
         formål = scanner.nextLine();
@@ -61,14 +61,14 @@ public class Treningsøkt {
         System.out.println("Var du (i)nne eller (u)te?");
         String reply = scanner.nextLine();
         if (reply.equals("i")) {
-            System.out.println("Hvordan var luften innendørs?");
+            System.out.println("Hvordan var luften innendørs? (oppgi i C)");
             innendørsLuft = scanner.nextLine();
-            System.out.println("Hvor mange tilskuere?");
+            System.out.println("Hvor mange tilskuere? (oppgi tall)");
             innendørsTilskuere = Integer.parseInt(scanner.nextLine());;
         } else if (reply.equals("u")) {
-            System.out.println("Hvordan var været utendørs?");
+            System.out.println("Beskriv hvordan var været utendørs?");
             utendørsVær = scanner.nextLine();
-            System.out.println("Hva var temperaturen utendørs?");
+            System.out.println("Hva var temperaturen utendørs? (oppgi i C)");
             utendørsTemperatur = Integer.parseInt(scanner.nextLine());
         }
 
