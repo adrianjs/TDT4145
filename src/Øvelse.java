@@ -24,8 +24,6 @@ public class Øvelse {
     //constructor
     public Øvelse(Connection conn) {
         this.conn = conn;
-        this.øktId = getØktIdFromDB(conn);
-        this.øvelseId = getØvelseIDFromDB(conn);
     }
 
     //getters
@@ -51,6 +49,8 @@ public class Øvelse {
      * @throws SQLException
      */
     public void addØvelse(Scanner scanner) throws SQLException {
+    	this.øktId = getØktIdFromDB(conn);
+        this.øvelseId = getØvelseIDFromDB(conn);
         System.out.println("Hvilken type øvelse vil du legge til? \n" +
                 "(s)tyrke eller (u)tholdenhet?");
         String input = scanner.nextLine();
@@ -146,10 +146,12 @@ public class Øvelse {
     private void ekstraØvelse(Scanner scanner) throws SQLException{
         System.out.println("Ønsker du å legge til en ekstra øvelse? (ja / nei)");
         String godkjenn = scanner.nextLine();
-        while (godkjenn.equals("ja")){
+        if (godkjenn.equals("ja")){
             addØvelse(scanner);
+        } else {
+        	System.out.println("Avbrutt, ingen flere øvelser.");
+        	return;
         }
-        System.out.println("Avbrutt, ingen flere øvelser.");
     }
     
     /**

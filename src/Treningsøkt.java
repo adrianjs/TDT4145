@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -121,7 +122,7 @@ public class Treningsøkt {
 
     public void genererStatistikk() {
     	int antallTreningsøkter = 0;
-    	int minutter = 0;
+    	double minutter = 0;
         String query = "SELECT øktId FROM Treningsøkt WHERE datotid >= now()-INTERVAL 1 MONTH AND YEAR(datotid)=YEAR(CURDATE())"; // skal vise hvor mange ganger du har trent den siste måneden
         String query2 = "SELECT varighet FROM Treningsøkt WHERE datotid >= now()-INTERVAL 1 MONTH AND YEAR(datotid)=YEAR(CURDATE())"; //Henter antall timer som er brukt på trening siste måned
         try {
@@ -130,7 +131,6 @@ public class Treningsøkt {
                 antallTreningsøkter++; //antar det må være getInt her fordi jeg henter count(*)?
             }
             ResultSet antallMinutter = getResultSet(conn, query2);
-            minutter = 0;
             while(antallMinutter.next()) {
             	minutter += antallMinutter.getInt("varighet"); //antar det samme har
             }
