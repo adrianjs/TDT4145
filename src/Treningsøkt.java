@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.time.*;
 import java.util.Scanner;
 
 /**
@@ -74,7 +73,6 @@ public class Treningsøkt {
         }
 
         String øktSql = String.format("INSERT INTO treningsøkt VALUES(%d,'" + getDatoTid() + "', %d, '%s', '%s', '%s', %d, '%s', %d)", getØktId(), getVarighet(), getFormål(), getTips(), getUtendørsVær(), getUtendørsTemperatur(), getInnendørsLuft(), getInnendørsTilskuere());
-        System.out.println(øktSql);
         
         System.out.println("Er du sikker på at du vil legge til denne treningsøkten? (ja / nei)");
         String godkjenn =  scanner.nextLine();

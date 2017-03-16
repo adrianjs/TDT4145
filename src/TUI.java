@@ -6,8 +6,6 @@ import java.util.Scanner;
  */
 public class TUI {
 
-    private Connection conn;
-
     /**
      * Brukes for å koble til databasen.
      * @param conn
@@ -89,7 +87,6 @@ public class TUI {
                     System.out.println("Treningslogg");
                     getTreningslogg(conn);
                     break;
-                }
                 case ("7"):
                     System.out.println("Legg til resultatlogg");
                     Resultatlogg resultatlogg = new Resultatlogg(conn);

@@ -8,7 +8,6 @@ public class Resultatlogg {
 
     //connection
     private Connection conn;
-    private Statement stmt;
 
     //resultatlogg
     private String resultater, beste, målType;
@@ -17,7 +16,6 @@ public class Resultatlogg {
     //constructor
     public Resultatlogg(Connection conn) {
         this.conn = conn;
-        this.stmt = stmt;
         this.resultatloggId = getResultIdFromDB(conn);
     }
 
