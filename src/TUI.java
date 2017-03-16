@@ -82,7 +82,8 @@ public class TUI {
                     break;
                 case ("5"):
                     System.out.println("Legg til ny øvelsesgruppe");
-                    //makeØvelseGruppe()
+                    Gruppe gruppe = new Gruppe(conn);
+                    gruppe.makeGruppe(scanner);
                     break;
                 case ("6"):
                     System.out.println("Treningslogg");
