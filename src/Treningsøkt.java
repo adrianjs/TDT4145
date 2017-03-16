@@ -99,7 +99,6 @@ public class Treningsøkt {
             ResultSet rs = getResultSet(conn, query);
             if (rs.next()){
                 int øktID = rs.getInt("øktID") + 1;
-                System.out.println("ØktID: " + øktID);
                 return øktID;
             }
         } catch (SQLException e) {

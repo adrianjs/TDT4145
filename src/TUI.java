@@ -46,7 +46,8 @@ public class TUI {
                 "4. Legg til nye øvelser \n" +
                 "5. Lag ny øvelsesgruppe \n" +
                 "6. Treningslogg \n" +
-                "7. Avslutt";
+                "7. Legg til resultatlogg \n" +
+                "8. Avslutt";
 
 
         boolean running = true;
@@ -55,7 +56,7 @@ public class TUI {
             System.out.println(mainPage);
             String input = scanner.nextLine();
             switch (input){
-                case ("7"):
+                case ("8"):
                     System.out.println("Avslutter programmet..");
                     running = false;
                     break;
@@ -66,7 +67,9 @@ public class TUI {
                     break;
                 case ("2"):
                     System.out.println("Registrer øvelser med mål");
-                    //addMålToØvelse()
+                    Mål mål = new Mål(conn);
+                    mål.addMålToØvelse(scanner);
+                    //velg øvelse først
                     break;
                 case ("3"):
                     System.out.println("Tidligere økter og resultater");
@@ -85,6 +88,13 @@ public class TUI {
                 case ("6"):
                     System.out.println("Treningslogg");
                     getTreningslogg(conn);
+                    break;
+                }
+                case ("7"):
+                    System.out.println("Legg til resultatlogg");
+                    Resultatlogg resultatlogg = new Resultatlogg(conn);
+                    resultatlogg.addResultatloggToØvelse(scanner);
+                    //velg øvelse først
                     break;
                 }
             }

@@ -161,7 +161,6 @@ public class Øvelse {
             ResultSet rs = getResultSet(conn, query);
             if (rs.next()){
                 int øvelseID = rs.getInt("øvelseID") + 1;
-                System.out.println("ØvelseID: " + øvelseID);
                 return øvelseID;
             }
         } catch (SQLException e) {
@@ -181,7 +180,6 @@ public class Øvelse {
             ResultSet rs = getResultSet(conn, query);
             if (rs.next()){
                 int øktID = rs.getInt("øktID");
-                System.out.println("ØktID: " + øktID);
                 return øktID;
             }
         } catch (SQLException e) {
