@@ -111,7 +111,8 @@ public class Mål {
         while (godkjenn.equals("ja")){
         	addMålToØvelse(scanner);
         }
-        System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+        System.out.println("Avbrutt, ingen flere mål");
+        return;
     }
 
     public void getAlleØkter(Scanner scanner) throws SQLException {

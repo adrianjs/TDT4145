@@ -114,7 +114,7 @@ public class Resultatlogg {
         while (godkjenn.equals("ja")){
         	addResultatloggToØvelse(scanner);
         }
-        System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+        System.out.println("Avbrutt, ingen flere resultater.");
     }
 
     public void getAlleØkter(Scanner scanner) throws SQLException {

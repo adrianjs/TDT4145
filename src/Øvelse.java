@@ -147,7 +147,7 @@ public class Øvelse {
         while (godkjenn.equals("ja")){
             addØvelse(scanner);
         }
-        System.out.println("Avbrutt, ingenting ble lagt til i databasen.");
+        System.out.println("Avbrutt, ingen flere øvelser.");
     }
     
     /**

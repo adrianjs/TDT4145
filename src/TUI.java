@@ -67,7 +67,6 @@ public class TUI {
                     System.out.println("Registrer øvelser med mål");
                     Mål mål = new Mål(conn);
                     mål.getAlleØkter(scanner);
-                    mål.addMålToØvelse(scanner);
                     //velg øvelse først
                     break;
                 case ("3"):
@@ -78,7 +77,6 @@ public class TUI {
                     System.out.println("Legg til ny øvelse");
                     Øvelse øvelse = new Øvelse(conn);
                     øvelse.getAlleØkter(scanner);
-                    øvelse.addØvelse(scanner);
                     //velg treningsøkt først
                     break;
                 case ("5"):
@@ -93,7 +91,6 @@ public class TUI {
                     System.out.println("Legg til resultatlogg");
                     Resultatlogg resultatlogg = new Resultatlogg(conn);
                     resultatlogg.getAlleØkter(scanner);
-                    resultatlogg.addResultatloggToØvelse(scanner);
                     //velg øvelse først
                     break;
                 }
